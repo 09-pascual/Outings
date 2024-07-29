@@ -1,0 +1,17 @@
+.welcome-container {
+  display: flex; /* Enables Flexbox layout */
+  flex-direction: column; /* Stacks children vertically */
+  justify-content: center; /* Centers content vertically */
+  align-items: center; /* Centers content horizontally */
+  height: 30vh; /* Makes the container take the full viewport height */
+  text-align: center; /* Centers text content within the elements */
+}
+
+.welcome-container h1 {
+  font-size: 2.5em; /* Adjust as needed for emphasis */
+  margin-bottom: 20px; /* Space between the heading and the text below */
+}
+
+.welcome-container div {
+  font-size: 1.2em; /* Adjust font size as needed */
+}
