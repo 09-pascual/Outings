@@ -4,10 +4,10 @@ import { Welcome } from "../welcome/welcome";
 import { UpcomingOutings } from "../outings/OutingList";
 import { CreateOutingForm } from "../outings/CreateOutingForm";
 
-export const CreatorViews = () => {
+export const CreatorViews = ({ currentUser }) => {
+  console.log(currentUser);
   return (
     <Routes>
-      <Route />
       <Route
         path="/"
         element={
@@ -22,12 +22,16 @@ export const CreatorViews = () => {
           element={
             <>
               <Welcome />
-              <UpcomingOutings />
+              <UpcomingOutings currentUser={currentUser} />
             </>
           }
         />
       </Route>
-      <Route path="createOuting" element={<CreateOutingForm />}></Route>
+      <Route
+        path="createOuting"
+        element={<CreateOutingForm currentUser={currentUser} />}
+      ></Route>
+      <Route path="profile" />
     </Routes>
   );
 };

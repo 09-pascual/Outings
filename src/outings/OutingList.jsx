@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllOutings } from "../services/outingService";
 import "./Outing.css";
 
-export const UpcomingOutings = () => {
+export const UpcomingOutings = ({ currentUser }) => {
   const [allOutings, setOutings] = useState([]);
 
   useEffect(() => {

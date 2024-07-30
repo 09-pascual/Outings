@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { getOutingTypes } from "../services/outingService";
+import { createOuting, getOutingTypes } from "../services/outingService";
+import { useNavigate } from "react-router-dom";
 
-export const CreateOutingForm = () => {
+export const CreateOutingForm = ({ currentUser }) => {
   const [outingTypes, setOutingTypes] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
-  const [newOuting, setNewOuting] = useState({});
+  const [newOuting, setNewOuting] = useState({ weather: "", links: "" });
+  const navigate = useNavigate();
 
   useEffect(() => {
     getOutingTypes().then((typesArray) => {
       setOutingTypes(typesArray);
-      console.log("types set");
     });
   }, []); //don't forget to add this to prevent infinite loop
   useEffect(() => {
@@ -18,7 +19,32 @@ export const CreateOutingForm = () => {
     setCurrentDate(formattedDate);
   }, []);
 
-  //   const handleSave()
+  const handleSave = () => {
+    if (
+      newOuting.title &&
+      newOuting.outingTypes &&
+      newOuting.startDate &&
+      newOuting.endDate &&
+      newOuting.location
+    ) {
+      const createdOuting = {
+        userId: currentUser.id,
+        outingTypeId: newOuting.outingTypes,
+        title: newOuting.title,
+        startDate: newOuting.startDate,
+        endDate: newOuting.endDate,
+        weather: newOuting.weather,
+        location: newOuting.location,
+        links: newOuting.links,
+      };
+      createOuting(createdOuting).then(() => navigate("/outingDetails"));
+    } else {
+      window.alert(
+        "Please fill out all required fields: Title, Outing Type, Start Date, End Date, and Location"
+      );
+    }
+  };
+
   return (
     <form>
       <h2>Create New Outing</h2>
@@ -28,15 +54,22 @@ export const CreateOutingForm = () => {
         </label>
         <input
           className="form-group"
-          type="tex"
+          type="text"
           placeholder="Outing Name"
           onChange={(event) => {
             const outingCopy = { ...newOuting };
-            outingCopy.description = event.target.value;
+            outingCopy.title = event.target.value;
             setNewOuting(outingCopy);
           }}
         ></input>
-        <select className="form-group">
+        <select
+          className="form-group"
+          onChange={(event) => {
+            const outingCopy = { ...newOuting };
+            outingCopy.outingTypes = event.target.value;
+            setNewOuting(outingCopy);
+          }}
+        >
           <option value="">Select Outing Type</option>
           {outingTypes.map((type) => (
             <option key={type.id} value={type.id}>
@@ -49,22 +82,72 @@ export const CreateOutingForm = () => {
         <label>
           <strong>Start Date:</strong>
         </label>
-        <input className="form-group" min={currentDate} type="date"></input>
+        <input
+          className="form-group"
+          min={currentDate}
+          type="date"
+          onChange={(event) => {
+            const outingCopy = { ...newOuting };
+            outingCopy.startDate = event.target.value;
+            setNewOuting(outingCopy);
+          }}
+        ></input>
         <label>
           <strong>End Date:</strong>
         </label>
-        <input className="form-group" min={currentDate} type="date"></input>
+        <input
+          className="form-group"
+          min={currentDate}
+          type="date"
+          onChange={(event) => {
+            const outingCopy = { ...newOuting };
+            outingCopy.endDate = event.target.value;
+            setNewOuting(outingCopy);
+          }}
+        ></input>
       </fieldset>
       <fieldset>
-        <input type="Text" placeholder="enter weather to avoid"></input>
+        <input
+          type="text"
+          placeholder="enter weather to avoid"
+          onChange={(event) => {
+            const outingCopy = { ...newOuting };
+            outingCopy.weather = event.target.value;
+            setNewOuting(outingCopy);
+          }}
+        ></input>
       </fieldset>
       <fieldset>
-        <input type="text" placeholder="Enter Location"></input>
+        <input
+          type="text"
+          placeholder="Enter Location"
+          onChange={(event) => {
+            const outingCopy = { ...newOuting };
+            outingCopy.location = event.target.value;
+            setNewOuting(outingCopy);
+          }}
+        ></input>
       </fieldset>
       <fieldset>
-        <input type="text" placeholder="enter links"></input>
+        <input
+          type="text"
+          placeholder="enter links"
+          onChange={(event) => {
+            const outingCopy = { ...newOuting };
+            outingCopy.links = event.target.value;
+            setNewOuting(outingCopy);
+          }}
+        ></input>
       </fieldset>
-      <fieldset className="form-btn btn-info"> Create Form</fieldset>
+      <fieldset>
+        <button
+          type="button"
+          className="form-btn btn-info"
+          onClick={handleSave}
+        >
+          Create Outing
+        </button>
+      </fieldset>
     </form>
   );
 };

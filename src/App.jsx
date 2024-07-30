@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Login } from "./components/auth/Login";
 import { Register } from "./components/auth/Register";
 import { Authorized } from "./views/Authorized";
-import { CreatorViews } from "./views/CreatorView";
+import { ApplicationViews } from "./views/ApplicationViews";
 
 export const App = () => {
   return (
@@ -13,7 +13,7 @@ export const App = () => {
         path="*"
         element={
           <Authorized>
-            <CreatorViews />
+            <ApplicationViews />
           </Authorized>
         }
       />
