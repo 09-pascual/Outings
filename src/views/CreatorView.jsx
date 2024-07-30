@@ -6,7 +6,6 @@ import { CreateOutingForm } from "../outings/CreateOutingForm";
 import { CreatorProfile } from "../outingCreator/creatorProfile";
 
 export const CreatorViews = ({ currentUser }) => {
-  console.log(currentUser);
   return (
     <>
       <CreatorNavBar />
