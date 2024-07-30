@@ -8,7 +8,6 @@ export const UpcomingOutings = ({ currentUser }) => {
   useEffect(() => {
     getAllOutings().then((outingsArray) => {
       setOutings(outingsArray);
-      console.log("Outings set!");
     });
   }, []); // only runs on initial render
 

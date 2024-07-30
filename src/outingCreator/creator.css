@@ -1,0 +1,12 @@
+.profile-container {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 50px auto; /* Centers horizontally and adds vertical spacing */
+  text-align: center; /* Centers text within the container */
+}
+
+.profile-details p {
+  margin: 10px 0;
+}
