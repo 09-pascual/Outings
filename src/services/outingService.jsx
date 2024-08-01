@@ -15,3 +15,9 @@ export const createOuting = (outing) => {
     body: JSON.stringify(outing),
   });
 };
+
+export const getOutingById = (outingId) => {
+  return fetch(`http://localhost:8088/Outings/${outingId}`).then((res) =>
+    res.json()
+  );
+};

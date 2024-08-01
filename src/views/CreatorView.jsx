@@ -4,6 +4,7 @@ import { Welcome } from "../welcome/welcome";
 import { UpcomingOutings } from "../outings/OutingList";
 import { CreateOutingForm } from "../outings/CreateOutingForm";
 import { CreatorProfile } from "../outingCreator/creatorProfile";
+import { DetailedOutingView } from "../outings/DetailedOutingView";
 
 export const CreatorViews = ({ currentUser }) => {
   return (
@@ -30,6 +31,10 @@ export const CreatorViews = ({ currentUser }) => {
           <Route
             path="profile"
             element={<CreatorProfile currentUser={currentUser} />}
+          />
+          <Route
+            path="detailedOutingView/:outingId"
+            element={<DetailedOutingView />}
           />
         </Route>
       </Routes>
