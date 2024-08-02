@@ -7,13 +7,19 @@ export const CreatorNavBar = () => {
   return (
     <ul className="navbar">
       <li className="navbar-item">
-        <Link to="/homepage">Homepage</Link>
+        <Link to="/homepage" className="navbar-link">
+          Homepage
+        </Link>
       </li>
       <li className="navbar-item">
-        <Link to="/createOuting">Create Outing</Link>
+        <Link to="/createOuting" className="navbar-link">
+          Create Outing
+        </Link>
       </li>
       <li className="navbar-item">
-        <Link to="/profile">Profile</Link>
+        <Link to="/profile" className="navbar-link">
+          Profile
+        </Link>
       </li>
       {localStorage.getItem("Outings_user") ? (
         <li className="navbar-item navbar-logout">

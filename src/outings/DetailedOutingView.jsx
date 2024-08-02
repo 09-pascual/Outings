@@ -56,7 +56,7 @@ export const DetailedOutingView = () => {
           events.map((event) => (
             <div key={event.id} className="events">
               <p>
-                <strong>Time:</strong> {event.time_Range}
+                <strong>Day:</strong> {event.date}
               </p>
               <p>
                 <strong>Location:</strong> {event.location}
