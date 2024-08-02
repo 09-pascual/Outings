@@ -1,8 +1,7 @@
 .navbar {
   display: flex;
   justify-content: center; /* Center items horizontally */
-  align-items: center; /* Center items vertically (if needed) */
-
+  align-items: center; /* Center items vertically */
   background-color: var(--dark);
   margin: 0;
   width: 100%;
@@ -10,9 +9,9 @@
 }
 
 .navbar-item {
-  flex-basis: 20%;
-  list-style-type: none;
+  flex: 1; /* Each item takes equal space */
   text-align: center;
+  list-style-type: none;
   color: var(--offWhite);
 }
 
@@ -20,6 +19,7 @@
   text-decoration: none;
   font-family: "Quicksand", sans-serif;
   letter-spacing: 1px;
+  color: var(--offWhite); /* Ensure the link color is set */
 }
 
 .navbar-logout {

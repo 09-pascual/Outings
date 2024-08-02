@@ -43,7 +43,7 @@ export const CreateEventForm = () => {
   };
 
   return (
-    <form>
+    <form className="create-event-form">
       <h2>Create an Event for {EventOuting.title}</h2>
       <fieldset>
         <label>
@@ -94,7 +94,7 @@ export const CreateEventForm = () => {
           className="form-btn btn-info"
           onClick={handleSave}
         >
-          CreateEvent
+          Create Event
         </button>
       </fieldset>
     </form>
