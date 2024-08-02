@@ -12,7 +12,7 @@ export const CreateOutingForm = ({ currentUser }) => {
     getOutingTypes().then((typesArray) => {
       setOutingTypes(typesArray);
     });
-  }, []); //don't forget to add this to prevent infinite loop
+  }, []);
 
   useEffect(() => {
     const today = new Date();
@@ -47,7 +47,7 @@ export const CreateOutingForm = ({ currentUser }) => {
   };
 
   return (
-    <form>
+    <form className="create-outing-form">
       <h2>Create New Outing</h2>
       <fieldset>
         <label>
@@ -110,7 +110,8 @@ export const CreateOutingForm = ({ currentUser }) => {
       <fieldset>
         <input
           type="text"
-          placeholder="enter weather to avoid"
+          className="form-group"
+          placeholder="Enter weather to avoid"
           onChange={(event) => {
             const outingCopy = { ...newOuting };
             outingCopy.weather = event.target.value;
@@ -121,6 +122,7 @@ export const CreateOutingForm = ({ currentUser }) => {
       <fieldset>
         <input
           type="text"
+          className="form-group"
           placeholder="Enter Location"
           onChange={(event) => {
             const outingCopy = { ...newOuting };
@@ -132,7 +134,8 @@ export const CreateOutingForm = ({ currentUser }) => {
       <fieldset>
         <input
           type="text"
-          placeholder="enter links"
+          className="form-group"
+          placeholder="Enter links"
           onChange={(event) => {
             const outingCopy = { ...newOuting };
             outingCopy.links = event.target.value;

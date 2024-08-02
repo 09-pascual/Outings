@@ -6,7 +6,7 @@ import "./Outing.css";
 export const DetailedOutingView = () => {
   const { outingId } = useParams();
   const [outing, setOuting] = useState({});
-  const [events, setEvents] = useState({});
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     getOutingById(outingId).then((data) => {
@@ -35,8 +35,7 @@ export const DetailedOutingView = () => {
           <strong>Start Date:</strong> {outing.startDate}
         </p>
         <p>
-          <strong>End Date:</strong>
-          {outing.endDate}
+          <strong>End Date:</strong> {outing.endDate}
         </p>
         <p>
           <strong>Location:</strong> {outing?.location}
@@ -53,19 +52,21 @@ export const DetailedOutingView = () => {
           <strong>Events</strong>
         </h3>
         {events.length > 0 ? (
-          events.map((event) => (
-            <div key={event.id} className="events">
-              <p>
-                <strong>Day:</strong> {event.date}
-              </p>
-              <p>
-                <strong>Location:</strong> {event.location}
-              </p>
-              <p>
-                <strong>Description:</strong> {event.description}
-              </p>
-            </div>
-          ))
+          <div className="events-container">
+            {events.map((event) => (
+              <div key={event.id} className="events">
+                <p>
+                  <strong>Day:</strong> {event.date}
+                </p>
+                <p>
+                  <strong>Location:</strong> {event.location}
+                </p>
+                <p>
+                  <strong>Description:</strong> {event.description}
+                </p>
+              </div>
+            ))}
+          </div>
         ) : (
           <p>No Events added</p>
         )}
