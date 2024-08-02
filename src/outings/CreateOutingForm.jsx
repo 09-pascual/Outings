@@ -13,6 +13,7 @@ export const CreateOutingForm = ({ currentUser }) => {
       setOutingTypes(typesArray);
     });
   }, []); //don't forget to add this to prevent infinite loop
+
   useEffect(() => {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
