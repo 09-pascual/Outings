@@ -38,7 +38,9 @@ export const CreateOutingForm = ({ currentUser }) => {
         location: newOuting.location,
         links: newOuting.links,
       };
-      createOuting(createdOuting).then(() => navigate("/outingDetails"));
+      createOuting(createdOuting).then((outing) =>
+        navigate(`/detailedOutingView/${outing.id}`)
+      );
     } else {
       window.alert(
         "Please fill out all required fields: Title, Outing Type, Start Date, End Date, and Location"
