@@ -6,16 +6,15 @@ import { CreateOutingForm } from "../outings/CreateOutingForm";
 import { CreatorProfile } from "../outingCreator/creatorProfile";
 import { DetailedOutingView } from "../outings/DetailedOutingView";
 import { CreateEventForm } from "../outings/CreateEventForm";
+import { EditOutingForm } from "../outings/EditOutingForm";
+// import { EditOutingForm } from "../outings/EditOutingForm";
 
 export const CreatorViews = ({ currentUser }) => {
   return (
     <>
       <CreatorNavBar />
       <Routes>
-        <Route
-          path="/"
-          element={<Outlet />} // This Outlet component will be used for nested routes
-        >
+        <Route path="/" element={<Outlet />}>
           <Route
             path="homepage"
             element={
@@ -35,9 +34,13 @@ export const CreatorViews = ({ currentUser }) => {
           />
           <Route
             path="detailedOutingView/:outingId"
-            element={<DetailedOutingView />}
+            element={<DetailedOutingView currentUser={currentUser} />}
           />
           <Route path="addEventForm/:outingId" element={<CreateEventForm />} />
+          <Route
+            path="editOutingDetails/:outingId"
+            element={<EditOutingForm currentUser={currentUser} />}
+          />
         </Route>
       </Routes>
     </>

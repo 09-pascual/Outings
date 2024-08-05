@@ -241,3 +241,32 @@
 .create-outing-form .form-btn:hover {
   background-color: #333;
 }
+
+.btn-edit {
+  background-color: rgb(14, 14, 195);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; /* Space between edit and delete buttons */
+  transition: background-color 0.3s;
+}
+
+.btn-edit:hover {
+  background-color: rgb(84, 84, 237);
+}
+
+.btn-delete {
+  background-color: rgb(218, 17, 17);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: darkred;
+}

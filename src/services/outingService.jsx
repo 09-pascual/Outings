@@ -13,7 +13,23 @@ export const createOuting = (outing) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(outing),
+  }).then((res) => res.json());
+};
+
+export const deleteOuting = (outingId) => {
+  return fetch(`http://localhost:8088/outings/${outingId}`, {
+    method: "DELETE",
   });
+};
+
+export const updateOuting = (outing) => {
+  return fetch(`http://localhost:8088/outings/${outing.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(outing),
+  }).then((res) => res.json());
 };
 
 export const getOutingById = (outingId) => {

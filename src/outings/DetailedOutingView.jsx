@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getEventByOutingById, getOutingById } from "../services/outingService";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  deleteOuting,
+  getEventByOutingById,
+  getOutingById,
+} from "../services/outingService";
 import "./Outing.css";
 
-export const DetailedOutingView = () => {
+export const DetailedOutingView = ({ currentUser }) => {
   const { outingId } = useParams();
   const [outing, setOuting] = useState({});
   const [events, setEvents] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getOutingById(outingId).then((data) => {
@@ -23,8 +28,10 @@ export const DetailedOutingView = () => {
     });
   }, [outingId]);
 
-  const handleSave = () => {
-    console.log("handle save has been pressed");
+  const handleDelete = () => {
+    deleteOuting(outingId).then(() => {
+      navigate("/homepage");
+    });
   };
 
   return (
@@ -73,10 +80,18 @@ export const DetailedOutingView = () => {
       </div>
       <div>
         <Link to={`/addEventForm/${outing.id}`}>
-          <button className="form-btn btn-info" onClick={handleSave}>
-            Add Event to trip
-          </button>
+          <button className="form-btn btn-info">Add Event to trip</button>
         </Link>
+        {currentUser.id === parseInt(outing.userId) && (
+          <>
+            <Link to={`/editOutingDetails/${outing.id}`}>
+              <button className="form-btn btn-edit">Edit Outing</button>
+            </Link>
+            <button className="form-btn btn-delete" onClick={handleDelete}>
+              Delete Outing
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
