@@ -31,7 +31,6 @@ export const DetailedOutingView = ({ currentUser }) => {
 
   const handleDelete = () => {
     getEventByOutingById(outingId).then((events) => {
-      // Filter events to ensure we only delete events associated with the current outing
       const outingEvents = events.filter(
         (event) => event.outingId === parseInt(outingId)
       );
@@ -40,12 +39,8 @@ export const DetailedOutingView = ({ currentUser }) => {
       );
 
       Promise.all(deleteEventPromises)
-        .then(() => {
-          return deleteOuting(outingId);
-        })
-        .then(() => {
-          navigate("/homepage");
-        });
+        .then(() => deleteOuting(outingId))
+        .then(() => navigate("/homepage"));
     });
   };
 
@@ -66,9 +61,26 @@ export const DetailedOutingView = ({ currentUser }) => {
       <p>
         <strong>Weather:</strong> {outing?.weather}
       </p>
-      <p>
-        <strong>Links:</strong> <a href={outing?.links}>{outing?.links}</a>
-      </p>
+      <div>
+        <strong>Links:</strong>
+        <ul>
+          {Array.isArray(outing.links) ? (
+            outing.links.map((link, index) => (
+              <li key={index}>
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  {link}
+                </a>
+              </li>
+            ))
+          ) : (
+            <li>
+              <a href={outing.links} target="_blank" rel="noopener noreferrer">
+                {outing.links}
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
       <div>
         <h3>
           <strong>Events</strong>
