@@ -53,3 +53,9 @@ export const createEventForDay = (event) => {
     body: JSON.stringify(event),
   });
 };
+
+export const deleteEvent = (eventId) => {
+  return fetch(`http://localhost:8088/Events/${eventId}`, {
+    method: "DELETE",
+  });
+};

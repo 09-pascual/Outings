@@ -21,8 +21,8 @@ export const EditOutingForm = ({ currentUser }) => {
       userId: currentUser.id,
       outingTypeId: outing.outingTypeId,
       title: outing.title,
-      startDate: outing.title,
-      endDate: outing.title,
+      startDate: outing.startDate,
+      endDate: outing.endDate,
       weather: outing.weather,
       location: outing.location,
       links: outing.links,
@@ -59,7 +59,7 @@ export const EditOutingForm = ({ currentUser }) => {
           value={outing.startDate}
           onChange={(event) => {
             const copy = { ...outing };
-            copy.date = event.target.value;
+            copy.startDate = event.target.value;
             setOuting(copy);
           }}
         />
@@ -74,7 +74,7 @@ export const EditOutingForm = ({ currentUser }) => {
           value={outing.endDate}
           onChange={(event) => {
             const copy = { ...outing };
-            copy.date = event.target.value;
+            copy.endDate = event.target.value;
             setOuting(copy);
           }}
         />

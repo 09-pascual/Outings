@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  deleteEvent,
   deleteOuting,
   getEventByOutingById,
   getOutingById,
@@ -29,8 +30,22 @@ export const DetailedOutingView = ({ currentUser }) => {
   }, [outingId]);
 
   const handleDelete = () => {
-    deleteOuting(outingId).then(() => {
-      navigate("/homepage");
+    getEventByOutingById(outingId).then((events) => {
+      // Filter events to ensure we only delete events associated with the current outing
+      const outingEvents = events.filter(
+        (event) => event.outingId === parseInt(outingId)
+      );
+      const deleteEventPromises = outingEvents.map((event) =>
+        deleteEvent(event.id)
+      );
+
+      Promise.all(deleteEventPromises)
+        .then(() => {
+          return deleteOuting(outingId);
+        })
+        .then(() => {
+          navigate("/homepage");
+        });
     });
   };
 
@@ -52,7 +67,7 @@ export const DetailedOutingView = ({ currentUser }) => {
         <strong>Weather:</strong> {outing?.weather}
       </p>
       <p>
-        <strong>Links:</strong> {outing?.links}
+        <strong>Links:</strong> <a href={outing?.links}>{outing?.links}</a>
       </p>
       <div>
         <h3>
