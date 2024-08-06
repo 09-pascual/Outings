@@ -26,6 +26,11 @@ export const CreateEventForm = () => {
     });
   }, [outingId]);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0];
+  };
+
   const handleSave = () => {
     if (newEvent.location && newEvent.description && newEvent.date) {
       const createdEvent = {
@@ -51,7 +56,12 @@ export const CreateEventForm = () => {
         </label>
         <input
           className="form-group"
-          min={currentDate}
+          min={
+            EventOuting.startDate
+              ? formatDate(EventOuting.startDate)
+              : currentDate
+          }
+          max={EventOuting.endDate ? formatDate(EventOuting.endDate) : ""}
           type="date"
           onChange={(event) => {
             const eventCopy = { ...newEvent };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  deleteEvent,
   deleteOuting,
   getEventByOutingById,
   getOutingById,
@@ -29,8 +30,17 @@ export const DetailedOutingView = ({ currentUser }) => {
   }, [outingId]);
 
   const handleDelete = () => {
-    deleteOuting(outingId).then(() => {
-      navigate("/homepage");
+    getEventByOutingById(outingId).then((events) => {
+      const outingEvents = events.filter(
+        (event) => event.outingId === parseInt(outingId)
+      );
+      const deleteEventPromises = outingEvents.map((event) =>
+        deleteEvent(event.id)
+      );
+
+      Promise.all(deleteEventPromises)
+        .then(() => deleteOuting(outingId))
+        .then(() => navigate("/homepage"));
     });
   };
 
@@ -51,9 +61,26 @@ export const DetailedOutingView = ({ currentUser }) => {
       <p>
         <strong>Weather:</strong> {outing?.weather}
       </p>
-      <p>
-        <strong>Links:</strong> {outing?.links}
-      </p>
+      <div>
+        <strong>Links:</strong>
+        <ul>
+          {Array.isArray(outing.links) ? (
+            outing.links.map((link, index) => (
+              <li key={index}>
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  {link}
+                </a>
+              </li>
+            ))
+          ) : (
+            <li>
+              <a href={outing.links} target="_blank" rel="noopener noreferrer">
+                {outing.links}
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
       <div>
         <h3>
           <strong>Events</strong>

@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 export const CreateOutingForm = ({ currentUser }) => {
   const [outingTypes, setOutingTypes] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
-  const [newOuting, setNewOuting] = useState({ weather: "", links: "" });
+  const [newOuting, setNewOuting] = useState({ weather: "", links: [] }); // Initialize links as an array
+  const [newLink, setNewLink] = useState(""); // State to handle new link input
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +20,16 @@ export const CreateOutingForm = ({ currentUser }) => {
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
   }, []);
+
+  const handleAddLink = () => {
+    if (newLink) {
+      setNewOuting((prevOuting) => ({
+        ...prevOuting,
+        links: [...prevOuting.links, newLink],
+      }));
+      setNewLink(""); // Clear the input after adding the link
+    }
+  };
 
   const handleSave = () => {
     if (
@@ -36,7 +47,7 @@ export const CreateOutingForm = ({ currentUser }) => {
         endDate: newOuting.endDate,
         weather: newOuting.weather,
         location: newOuting.location,
-        links: newOuting.links,
+        links: newOuting.links, // Save the links array
       };
       createOuting(createdOuting).then((outing) =>
         navigate(`/detailedOutingView/${outing.id}`)
@@ -134,16 +145,24 @@ export const CreateOutingForm = ({ currentUser }) => {
         ></input>
       </fieldset>
       <fieldset>
+        <label>
+          <strong>Links:</strong>
+        </label>
         <input
           type="text"
           className="form-group"
-          placeholder="Enter links"
-          onChange={(event) => {
-            const outingCopy = { ...newOuting };
-            outingCopy.links = event.target.value;
-            setNewOuting(outingCopy);
-          }}
-        ></input>
+          placeholder="Enter a link"
+          value={newLink}
+          onChange={(event) => setNewLink(event.target.value)}
+        />
+        <button type="button" onClick={handleAddLink}>
+          Add Link
+        </button>
+        <ul>
+          {newOuting.links.map((link, index) => (
+            <li key={index}>{link}</li>
+          ))}
+        </ul>
       </fieldset>
       <fieldset>
         <button
