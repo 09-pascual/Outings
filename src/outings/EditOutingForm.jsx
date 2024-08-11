@@ -4,14 +4,29 @@ import { getOutingById, updateOuting } from "../services/outingService";
 
 export const EditOutingForm = ({ currentUser }) => {
   const { outingId } = useParams();
-  const [outing, setOuting] = useState({});
+  const [outing, setOuting] = useState({ links: [] });
+  const [newLink, setNewLink] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     getOutingById(outingId).then((data) => {
-      setOuting(data);
+      console.log("Fetched data:", data);
+      setOuting((prevOuting) => ({
+        ...data,
+        links: Array.isArray(data.links) ? data.links : [],
+      }));
     });
   }, [outingId]);
+
+  const handleAddLink = () => {
+    if (newLink) {
+      setOuting((prevOuting) => ({
+        ...prevOuting,
+        links: [...prevOuting.links, newLink],
+      }));
+      setNewLink("");
+    }
+  };
 
   const handleSave = (event) => {
     event.preventDefault();
@@ -110,17 +125,20 @@ export const EditOutingForm = ({ currentUser }) => {
       </fieldset>
       <fieldset>
         <label htmlFor="links">Links:</label>
+        <ul>
+          {Array.isArray(outing.links) &&
+            outing.links.map((link, index) => <li key={index}>{link}</li>)}
+        </ul>
         <input
           type="text"
-          id="links"
-          name="links"
-          value={outing.links || ""}
-          onChange={(event) => {
-            const copy = { ...outing };
-            copy.links = event.target.value;
-            setOuting(copy);
-          }}
+          id="newLink"
+          className="form-group"
+          value={newLink}
+          onChange={(event) => setNewLink(event.target.value)}
         />
+        <button type="button" onClick={handleAddLink}>
+          Add Link
+        </button>
       </fieldset>
       <fieldset>
         <button

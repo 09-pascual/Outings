@@ -32,6 +32,16 @@ export const updateOuting = (outing) => {
   }).then((res) => res.json());
 };
 
+export const updateEvent = (event) => {
+  return fetch(`http://localhost:8088/Events/${event.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(event),
+  }).then((res) => res.json());
+};
+
 export const getOutingById = (outingId) => {
   return fetch(`http://localhost:8088/Outings/${outingId}`).then((res) =>
     res.json()

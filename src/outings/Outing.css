@@ -57,32 +57,7 @@
   text-align: center;
   margin: 20px auto;
   padding: 20px;
-  max-width: 600px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.outing-details {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 10px 0;
-}
-
-.outing-details p {
-  margin: 0;
-}
-
-.detailed-outing {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 800px; /* Increased max-width for better layout */
+  max-width: 800px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
@@ -278,4 +253,17 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.button-group,
+.button-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-container a,
+button-container button {
+  display: inline-block;
 }
