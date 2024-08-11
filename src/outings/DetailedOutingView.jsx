@@ -44,6 +44,17 @@ export const DetailedOutingView = ({ currentUser }) => {
     });
   };
 
+  const handleEventDelete = (eventId) => {
+    deleteEvent(eventId).then(() => {
+      getEventByOutingById(outingId).then((data) => {
+        const filteredEvents = data.filter(
+          (event) => event.outingId === parseInt(outingId)
+        );
+        setEvents(filteredEvents);
+      });
+    });
+  };
+
   return (
     <div className="detailed-outing">
       <h2>{outing?.title}</h2>
@@ -98,6 +109,17 @@ export const DetailedOutingView = ({ currentUser }) => {
                 <p>
                   <strong>Description:</strong> {event.description}
                 </p>
+                <div className="button-group">
+                  <Link to={`/editEventDetails/${outing.id}/${event.id}`}>
+                    <button className="form-btn btn-edit">Edit Event</button>
+                  </Link>
+                  <button
+                    className="form-btn btn-delete"
+                    onClick={() => handleEventDelete(event.id)}
+                  >
+                    Delete Event
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -105,7 +127,7 @@ export const DetailedOutingView = ({ currentUser }) => {
           <p>No Events added</p>
         )}
       </div>
-      <div>
+      <div className="button-container">
         <Link to={`/addEventForm/${outing.id}`}>
           <button className="form-btn btn-info">Add Event to trip</button>
         </Link>

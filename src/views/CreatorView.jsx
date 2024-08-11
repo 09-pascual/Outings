@@ -7,6 +7,7 @@ import { CreatorProfile } from "../outingCreator/creatorProfile";
 import { DetailedOutingView } from "../outings/DetailedOutingView";
 import { CreateEventForm } from "../outings/CreateEventForm";
 import { EditOutingForm } from "../outings/EditOutingForm";
+import { EditDayEventForm } from "../outings/EditDayEventForm";
 // import { EditOutingForm } from "../outings/EditOutingForm";
 
 export const CreatorViews = ({ currentUser }) => {
@@ -40,6 +41,10 @@ export const CreatorViews = ({ currentUser }) => {
           <Route
             path="editOutingDetails/:outingId"
             element={<EditOutingForm currentUser={currentUser} />}
+          />
+          <Route
+            path="/editEventDetails/:outingId/:eventId"
+            element={<EditDayEventForm currentUser={currentUser} />}
           />
         </Route>
       </Routes>
