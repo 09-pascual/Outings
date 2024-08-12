@@ -5,11 +5,17 @@
   align-items: center; /* Centers content horizontally */
   height: 30vh; /* Makes the container take the full viewport height */
   text-align: center; /* Centers text content within the elements */
+  padding-top: 35px; /* Adjust padding as needed for extra space at the top */
+}
+
+.welcome-container img.welcome-logo {
+  width: 160px; /* Increase width to make the image slightly larger */
+  height: auto; /* Maintain aspect ratio */
 }
 
 .welcome-container h1 {
   font-size: 2.5em; /* Adjust as needed for emphasis */
-  margin-bottom: 20px; /* Space between the heading and the text below */
+  margin-bottom: 10px; /* Space between the heading and the text below */
 }
 
 .welcome-container div {

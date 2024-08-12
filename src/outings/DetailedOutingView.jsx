@@ -70,7 +70,7 @@ export const DetailedOutingView = ({ currentUser }) => {
         </p>
       </div>
       <p>
-        <strong>Weather:</strong> {outing?.weather}
+        <strong>Weather: Avoid </strong> {outing?.weather}
       </p>
       <div>
         <strong>Links:</strong>

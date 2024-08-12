@@ -14,9 +14,5 @@ export const ApplicationViews = () => {
     setCurrentUser(OutingsUserObject);
   }, []);
 
-  return currentUser.creator ? (
-    <CreatorViews currentUser={currentUser} />
-  ) : (
-    <>friend view</>
-  );
+  return <CreatorViews currentUser={currentUser} />;
 };

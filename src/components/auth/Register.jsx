@@ -10,6 +10,7 @@ export const Register = (props) => {
     lastName: "",
     email: "",
     creator: false,
+    fullName: "",
   });
   let navigate = useNavigate();
 
@@ -24,7 +25,7 @@ export const Register = (props) => {
           })
         );
 
-        navigate("/");
+        navigate("/homepage");
       }
     });
   };
@@ -58,9 +59,48 @@ export const Register = (props) => {
             <input
               onChange={updateCustomer}
               type="text"
+              id="userName"
+              className="form-control"
+              placeholder="Enter username"
+              required
+              autoFocus
+            />
+          </div>
+        </fieldset>
+        <fieldset>
+          <div className="form-group">
+            <input
+              onChange={updateCustomer}
+              type="text"
               id="fullName"
               className="form-control"
-              placeholder="Enter your name"
+              placeholder="Enter your fullName"
+              required
+              autoFocus
+            />
+          </div>
+        </fieldset>
+        <fieldset>
+          <div className="form-group">
+            <input
+              onChange={updateCustomer}
+              type="text"
+              id="firstName"
+              className="form-control"
+              placeholder="Enter your first name"
+              required
+              autoFocus
+            />
+          </div>
+        </fieldset>
+        <fieldset>
+          <div className="form-group">
+            <input
+              onChange={updateCustomer}
+              type="text"
+              id="lastName"
+              className="form-control"
+              placeholder="Enter your last name"
               required
               autoFocus
             />
